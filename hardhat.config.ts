@@ -1,48 +1,45 @@
-import { HardhatUserConfig } from "hardhat/config";
+import { HardhatUserConfig, vars } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
-import dotenv from "dotenv";
-dotenv.config();
+
+const INFURA_API_KEY = vars.get("INFURA_API_KEY");
+const ANKR_API_KEY = vars.get("ANKR_API_KEY");
+const PRIVATE_KEY = vars.get("PRIVATE_KEY");
+const ETHERSCAN_API_KEY = vars.get("ETHERSCAN_API_KEY");
 
 const config: HardhatUserConfig = {
   solidity: "0.8.19",
   defaultNetwork: "localhost",
   networks: {
     localhost: {},
-    ethFork: {
+    hardhat: {
       forking: {
-        url: process.env.MAINNET_RPC as string,
-        // blockNumber: 15058412,
-      },
-    },
-    bscFork: {
-      forking: {
-        url: process.env.BSC_MAINNET_RPC as string,
+        url: `https://rpc.ankr.com/bsc/${ANKR_API_KEY}`,
         // blockNumber: 15058412,
       },
     },
     polygon_mumbai: {
-      url: process.env.POLYGON_MUMBAI_RPC,
-      accounts: [process.env.PRIVATE_KEY as string],
+      url: `https://polygon-mumbai.infura.io/v3/${INFURA_API_KEY}`,
+      accounts: [PRIVATE_KEY],
     },
     goerli: {
-      url: process.env.GOERLI_RPC,
-      accounts: [process.env.PRIVATE_KEY as string],
+      url: `https://goerli.infura.io/v3/${INFURA_API_KEY}`,
+      accounts: [PRIVATE_KEY],
     },
     sepolia: {
-      url: process.env.SEPOLIA_RPC,
-      accounts: [process.env.PRIVATE_KEY as string],
+      url: `https://sepolia.infura.io/v3/${INFURA_API_KEY}`,
+      accounts: [PRIVATE_KEY],
     },
     avalanche_fuji: {
-      url: process.env.AVALANCHE_FUJI_RPC,
-      accounts: [process.env.PRIVATE_KEY as string],
+      url: `https://avalanche-fuji.infura.io/v3/${INFURA_API_KEY}`,
+      accounts: [PRIVATE_KEY],
     },
     bsc_testnet: {
-      url: process.env.BSC_TESTNET_RPC,
-      accounts: [process.env.PRIVATE_KEY as string],
+      url: `https://rpc.ankr.com/bsc_testnet_chapel/${ANKR_API_KEY}`,
+      accounts: [PRIVATE_KEY],
     },
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: ETHERSCAN_API_KEY,
   },
 };
 

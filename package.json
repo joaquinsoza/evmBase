@@ -1,5 +1,5 @@
 {
-  "name": "evmBase",
+  "name": "evm-base",
   "version": "1.0.0",
   "description": "evm base for developing evm projects",
   "main": "index.js",
